@@ -70,6 +70,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:id="@+id/group"
         >
         <RadioButton
             android:layout_width="wrap_content"
@@ -86,6 +87,7 @@
             android:layout_height="wrap_content"
             android:text="Luxury room"
             android:id="@+id/luxury_room"/>
+
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -104,4 +106,14 @@
         android:textColor="#ffffff"
         tools:layout_editor_absoluteX="143dp"
         tools:layout_editor_absoluteY="362dp" />
+
+    <Button
+        android:layout_marginTop="16dp"
+        android:id="@+id/goback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#a4260a"
+        android:text=" Go Back"
+        android:textColor="#ffff"
+        android:onClick="back"/>
 </LinearLayout>
