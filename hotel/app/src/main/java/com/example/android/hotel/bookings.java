@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import static android.R.string.yes;
 
 public class bookings extends AppCompatActivity {
+Cursor cursor;
+    String[] select;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,77 +38,28 @@ public class bookings extends AppCompatActivity {
         {
             case 0:
                 roomstoshow.clear();
-                String[] select= new String[]{"Single"};
-                Cursor cursor=db.query(contract.entry.table_name,columns,selection,select,null,null,null);
-                if(cursor!=null)
-                {
-                    if(cursor.moveToFirst()){
-                    do{
-                        roomstoshow.add(cursor.getString(cursor.getColumnIndex(contract.entry.room_no)));
+                 select= new String[]{"Single"};
+                 //cursor=db.query(contract.entry.table_name,columns,selection,select,null,null,null);
 
-                    }
-                    while(cursor.moveToNext());
-                    }
-                }
-                assert cursor != null;
-                cursor.close();
                 break;
             case 1:  roomstoshow.clear();
-                String[] select_double= new String[]{"Double"};
-                Cursor cursor_double=db.query(contract.entry.table_name,columns,selection,select_double,null,null,null);
-                if(cursor_double!=null) {
-                    if (cursor_double.moveToFirst()) {
-                        do {
-                            roomstoshow.add(cursor_double.getString(cursor_double.getColumnIndex(contract.entry.room_no)));
+                select= new String[]{"Double"};
 
-                        }
-                        while (cursor_double.moveToNext());
-                    }
-                }
-                assert cursor_double != null;
-                cursor_double.close();
                 break;
             case 2: roomstoshow.clear();
-                String[] select_triple= new String[]{"Luxury"};
-                Cursor cursor_triple=db.query(contract.entry.table_name,columns,selection,select_triple,null,null,null);
-                if(cursor_triple!=null) {
-                    if (cursor_triple.moveToFirst()) {
-
-                        do {
-                            roomstoshow.add(cursor_triple.getString(cursor_triple.getColumnIndex(contract.entry.room_no)));
-
-                        }
-
-                        while (cursor_triple.moveToNext());
-
-                    }
-                }
-                assert cursor_triple != null;
-                cursor_triple.close();
+                select= new String[]{"Luxury"};
                 break;
 
             case 3:roomstoshow.clear();
-                    String select_lux[]={"Luxury"};
-                    Cursor cursor_lux=db.query(contract.entry.table_name,columns,selection,select_lux,null,null,null);
-                    if(cursor_lux!=null)
-                    {
-                        if(cursor_lux.moveToFirst())
-                        {
-                            do
-                            {
-                                roomstoshow.add(cursor_lux.getString(cursor_lux.getColumnIndex(contract.entry.room_no)));
-                            }
-                            while(cursor_lux.moveToNext());
-                        }
-                    }
-                assert cursor_lux != null;
-                cursor_lux.close();
+                    select=new String[]{"Luxury"};
+                   break;
 
-                break;
+
             default:break;
         }
-        ArrayAdapter arrayAdapter=new ArrayAdapter(bookings.this,android.R.layout.simple_list_item_1,roomstoshow);
-        listView.setAdapter(arrayAdapter);
+        cursor=db.query(contract.entry.table_name,columns,selection,select,null,null,null);
+        my_cursor cursed=new my_cursor(this,cursor);
+        listView.setAdapter(cursed);
     }
 
 }
